@@ -7,10 +7,11 @@ export const projects = [
     description: 'Sistema desenvolvido em Python com OpenCV capaz de identificar cômodos em plantas arquitetônicas e sobrepor automaticamente a rede elétrica. Um projeto que une programação, visão computacional e design aplicado.',
     technologies: ['Python', 'OpenCV', 'Computer Vision', 'Automation'],
     images: [
-      '/src/assets/projects/Planta Automatica/Planta AUTO 2025-06-03 144701.png',
-      '/src/assets/projects/Planta Automatica/Planta AUTO-06-03 144636.png',
-      '/src/assets/projects/Planta Automatica/Planta AUTO  2025-06-03 145643 - Copia.png', 
-      '/src/assets/projects/Planta Automatica/Planta AUTO -06-03 145626.png'
+      '/assets/projects/Planta Automatica/Planta AUTO 2025-06-03 144701.png',
+      '/assets/projects/Planta Automatica/Planta AUTO-06-03 144636.png',
+      '/assets/projects/Planta Automatica/Planta AUTO 2025-06-03 145643 - Copia.png',
+      '/assets/projects/Planta Automatica/Planta AUTO -06-03 145626.png'
+
     ],
     featured: true,
     year: '2025'
@@ -22,14 +23,14 @@ export const projects = [
     description: 'Interface moderna para e-commerce de tênis Nike, focando em experiência do usuário e design visual atrativo. Projeto desenvolvido com foco em conversão e usabilidade.',
     technologies: ['UI/UX Design', 'Figma', 'Web Design', 'E-commerce'],
     images: [
-      '/src/assets/projects/niki canva/1.png',
-      '/src/assets/projects/niki canva/2.png',
-      '/src/assets/projects/niki canva/Home.png',
-      '/src/assets/projects/niki canva/Home.png',
-      '/src/assets/projects/niki canva/Produtos.png',
-      '/src/assets/projects/niki canva/Coleções II.png',
-      '/src/assets/projects/niki canva/6.png',
-      '/src/assets/projects/niki canva/7.png',
+      '/assets/projects/niki canva/1.png',
+      '/assets/projects/niki canva/2.png',
+      '/assets/projects/niki canva/Home.png',
+      '/assets/projects/niki canva/Home.png',
+      '/assets/projects/niki canva/Produtos.png',
+      '/assets/projects/niki canva/Coleções II.png',
+      '/assets/projects/niki canva/6.png',
+      '/assets/projects/niki canva/7.png',
     ],
     featured: true,
     year: '2024'
@@ -77,7 +78,7 @@ export const projects = [
   category: 'UI/UX Design',
   description: 'Protótipo de aplicativo educacional desenvolvido no Canva para a instituição Senai. O design foi pensado para oferecer aos alunos diversas funcionalidades: acesso a múltiplas disciplinas em um só lugar, cursos complementares, aulas gravadas, cardápio semanal, cronograma de salas e horários, além de planos de estudo baseados em IA. O aplicativo também permitiria que os alunos acompanhassem seus estudos dirigidos e verificassem pendências acadêmicas de forma simples e intuitiva.',
   technologies: ['Canva', 'UI/UX', 'Prototyping', 'Education'],
-  images: ['/src/assets/projects/Captura de tela 2025-09-02 141104.png', '/src/assets/projects/Captura de tela 2025-09-02 141122.png'], // suas duas imagens vão aqui
+  images: ['/assets/projects/Captura de tela 2025-09-02 141104.png', '/assets/projects/Captura de tela 2025-09-02 141122.png'],
   video: null,
   featured: true,
   year: '2025'
