@@ -267,7 +267,7 @@ function App() {
                     <div className="absolute inset-0 bg-emerald-400/20 group-hover:bg-transparent transition-colors duration-300"></div>
                     <div className="absolute inset-0 flex items-center justify-center text-emerald-400 text-6xl font-bold">
                        <img
-                            src="/perfil.png"
+                            src="/perfil.jpg"
                             alt="Foto de Luiz Felipe"
                             className="absolute inset-0 w-full h-full object-cover"
                           />
