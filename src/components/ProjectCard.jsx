@@ -1,64 +1,37 @@
 import { useState } from 'react'
-import { Github, ExternalLink, Play, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, Play } from 'lucide-react'
 
+// Card de destaque (Home): layout alternado, mostra a capa e leva à página de detalhe.
 const ProjectCard = ({ project, index }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [currentImage, setCurrentImage] = useState(0)
   const isEven = index % 2 === 0
-
-  const handlePrev = () => {
-    setCurrentImage((prev) =>
-      prev === 0 ? project.images.length - 1 : prev - 1
-    )
-  }
-
-  const handleNext = () => {
-    setCurrentImage((prev) =>
-      prev === project.images.length - 1 ? 0 : prev + 1
-    )
-  }
+  const to = `/projetos/${project.id}`
+  const cover = project.cover || (project.gallery && project.gallery[0]) || ''
+  const hasVideo = Array.isArray(project.videos) && project.videos.length > 0
 
   return (
     <div className={`grid md:grid-cols-12 gap-8 items-center ${!isEven ? 'md:text-right' : ''}`}>
-      {/* Project Media (Image or Video) */}
+      {/* Mídia (capa) que leva ao detalhe */}
       <div className={`md:col-span-7 ${!isEven ? 'md:order-2' : ''}`}>
-        <div className="relative group">
+        <Link to={to} className="relative group block">
           <div className="relative overflow-hidden rounded border border-slate-700 bg-slate-800">
-            
-            {project.video ? (
-              <video
-                src={project.video}
-                controls
-                className="w-full h-80 object-cover rounded"
+            {cover ? (
+              <img
+                src={cover}
+                alt={project.title}
+                className={`w-full h-auto block transition-all duration-300 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                } group-hover:opacity-80`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageLoaded(true)}
               />
-            ) : project.images && project.images.length > 0 ? (
-              <div className="relative">
-                <img
-                  src={project.images[currentImage]}
-                  alt={project.title}
-                  className={`w-full h-80 object-cover transition-all duration-300 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0'
-                  } group-hover:opacity-80`}
-                  onLoad={() => setImageLoaded(true)}
-                />
-
-                {/* Botões de navegação */}
-                {project.images.length > 1 && (
-                  <>
-                    <button
-                      onClick={handlePrev}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-slate-900/70 p-2 rounded-full text-white hover:bg-slate-900"
-                    >
-                      <ChevronLeft size={20} />
-                    </button>
-                    <button
-                      onClick={handleNext}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-slate-900/70 p-2 rounded-full text-white hover:bg-slate-900"
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-                  </>
-                )}
+            ) : hasVideo ? (
+              <div className="w-full h-80 bg-slate-800 flex items-center justify-center">
+                <div className="text-center">
+                  <Play size={48} className="text-emerald-400 mx-auto mb-2" />
+                  <span className="text-slate-500 text-lg">{project.category}</span>
+                </div>
               </div>
             ) : (
               <div className="w-full h-80 bg-slate-800 flex items-center justify-center">
@@ -68,26 +41,28 @@ const ProjectCard = ({ project, index }) => {
                 </div>
               </div>
             )}
-            
+
             {/* Overlay */}
             <div className="absolute inset-0 bg-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
           </div>
-        </div>
+        </Link>
       </div>
 
-      {/* Project Info */}
+      {/* Info */}
       <div className={`md:col-span-5 ${!isEven ? 'md:order-1' : ''}`}>
         <p className="text-emerald-400 text-sm mb-2 font-mono">Projeto em destaque</p>
-        <h3 className="text-2xl font-bold text-slate-200 mb-4 hover:text-emerald-400 transition-colors">
-          {project.title}
-        </h3>
-        
+        <Link to={to}>
+          <h3 className="text-2xl font-bold text-slate-200 mb-4 hover:text-emerald-400 transition-colors">
+            {project.title}
+          </h3>
+        </Link>
+
         <div className="bg-slate-800 p-6 rounded border border-slate-700 mb-4 shadow-lg">
           <p className="text-slate-400 leading-relaxed">
-            {project.description}
+            {project.summary || project.description}
           </p>
         </div>
-        
+
         <div className={`flex flex-wrap gap-2 mb-4 ${!isEven ? 'md:justify-end' : ''}`}>
           {project.technologies.map((tech) => (
             <span key={tech} className="text-sm text-slate-400 font-mono">
@@ -95,33 +70,15 @@ const ProjectCard = ({ project, index }) => {
             </span>
           ))}
         </div>
-        
-        <div className={`flex space-x-4 ${!isEven ? 'md:justify-end' : ''}`}>
-          <a 
-            href="#" 
-            className="text-slate-400 hover:text-emerald-400 transition-colors"
-            title="Ver código"
+
+        <div className={`flex ${!isEven ? 'md:justify-end' : ''}`}>
+          <Link
+            to={to}
+            className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-mono text-sm"
           >
-            <Github size={20} />
-          </a>
-          <a 
-            href="#" 
-            className="text-slate-400 hover:text-emerald-400 transition-colors"
-            title="Ver projeto"
-          >
-            <ExternalLink size={20} />
-          </a>
-          {project.video && (
-            <a 
-              href={project.video}
-              className="text-slate-400 hover:text-emerald-400 transition-colors"
-              title="Ver demo"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Play size={20} />
-            </a>
-          )}
+            Ver projeto
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </div>
